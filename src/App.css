@@ -58,7 +58,7 @@ body {
 }
 
 .grass {
-  background-color: aquamarine;
+  background-color: rgb(95, 217, 138);
 }
 
 .water {
@@ -81,15 +81,39 @@ body {
 }
 
 .normal {
-  background-color: white;
+  background-color: rgb(187, 185, 185);
+}
+
+.normal .type{
+  color: white;
 }
 
 .electric {
-  background-color: #f2eac6;
+  background-color: #f9ce0e;
+}
+
+.rock {
+  background-color: #484747;
+}
+
+.rock .type{
+  color: white;
+}
+
+.ghost {
+  background-color: #8768a0;
+}
+
+.ghost .type{
+  color: white;
 }
 
 .ground {
-  background-color: #eeab9d;
+  background-color: #8f5c2c;
+}
+
+.ground .type{
+  color: white;
 }
 
 .poison {
@@ -102,4 +126,16 @@ body {
 
 .fairy {
   background-color: #f1ddf5;
+}
+
+.fighting {
+  background-color: #ebbd94;
+}
+
+.ice {
+  background-color: #a1e6ff;
+}
+
+.dragon {
+  background-color: #e0c0fd;
 }
