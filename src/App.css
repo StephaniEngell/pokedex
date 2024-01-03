@@ -1,38 +1,105 @@
-.App {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Shantell Sans', cursive;
+}
+
+.container h1 {
   text-align: center;
+  padding-top: 15px;
+  margin-bottom: 15px;
+  font-size: 50px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.pokemons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit , minmax(300px, auto));
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 20px;
+  padding-bottom: 10px;
+}
+
+.card {
+  max-width: 300px;
+  padding: 20px;
+  text-align: center;
+  border-radius: 20px;
+  background-color: white;
+  overflow: hidden;
+  border: 1px solid black;;
+}
+
+.card-image {
+  max-width: 150px;
+}
+
+.type {
+  color: #615e5e;
+  padding-top: 5px;
+  position: relative;
+  top: 45px;
+  transition: top 1s;
+  font-size: 1.25rem;
+}
+
+.card:hover .type{
+  cursor: pointer;
+  top: 0;
+}
+
+.fire {
+  background-color: rgb(255, 78, 9);
+}
+
+.grass {
+  background-color: aquamarine;
+}
+
+.water {
+  background-color: rgb(12, 155, 231);
+  backdrop-filter: blur(90px);
+  backdrop-filter: brightness(95%);
+  border: 2px solid rgba(255, 255, 255, 0.10);
+}
+
+.water .type{
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.card.water{
+  color: black;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.bug {
+  background-color: #f8d5a3;
+}
+
+.normal {
+  background-color: white;
+}
+
+.electric {
+  background-color: #f2eac6;
+}
+
+.ground {
+  background-color: #eeab9d;
+}
+
+.poison {
+  background-color: #871cd3;
+}
+
+.poison .type{
+  color: white;
+}
+
+.fairy {
+  background-color: #f1ddf5;
 }

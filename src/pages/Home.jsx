@@ -1,62 +1,55 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import PokemonCard from "../components";
-import { Container, Grid } from "@mui/material";
 import axios from "axios";
-import { Skeletons } from "../components/Skeletons";
 
 export default function Home() {
-  const [pokemons, setPokemons] = useState([]);
+  const [pokemons, setPokemons] = useState({});
+  const [searchPokemon, setSearchPokemon] = useState("");
+  
+
+  const getPokemons = (id) => {
+    axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`).then((response) => {
+      const pokemon = response.data;
+
+      setPokemons((prevPokemons) => ({ ...prevPokemons, [id]: pokemon }));
+    });
+  };
+
+  const arrayPokemons = () =>
+    Array(150)
+      .fill()
+      .map((_, index) => getPokemons(index + 1));
 
   useEffect(() => {
-    getPokemons();
-  }, []);
+    arrayPokemons();
+  }, []); // eslint-disable-line
 
-  const getPokemons = () => {
-    let endpoints = [];
-    for (let i = 1; i < 50; i++) {
-      endpoints.push(`https://pokeapi.co/api/v2/pokemon/${i}/`);
-    }
-
-    axios
-      .all(endpoints.map((endpoint) => axios.get(endpoint)))
-      .then((res) => setPokemons(res))
-      .catch((err) => console.log(err));
-  };
-
-  const pokemonFilter = (name) => {
-    let filteredPokemons = [];
-    if (name === "") {
-      getPokemons();
-    }
-    for (let i in pokemons) {
-      if (pokemons[i].data.name.includes(name)) {
-        filteredPokemons.push(pokemons[i]);
-      }
-    }
-    setPokemons(filteredPokemons);
-  };
+  const filteredPokemons = Object.values(pokemons).filter((pokemon) =>
+    pokemon.name.toLowerCase().includes(searchPokemon.toLowerCase()) || pokemon.id == searchPokemon // eslint-disable-line
+  );
 
   return (
-    <div>
-      <Navbar pokemonFilter={pokemonFilter} />
-      <Container maxWidth="false">
-        <Grid container spacing={3}>
-          {pokemons.length === 0 ? (
-            <Skeletons />
-          ) : (
-            pokemons.map((pokemon, key) => (
-              <Grid item xs={12} s={6} md={4} lg={2} key={key}>
-                <PokemonCard
-                  name={pokemon.data.name}
-                  image={pokemon.data.sprites.front_default}
-                  types={pokemon.data.types}
-                />
-              </Grid>
-            ))
-          )}
-        </Grid>
-      </Container>
+    <div className="container">
+      <Navbar onSearch={setSearchPokemon}/>
+
+      <ul className="pokemons">
+        {filteredPokemons.map(({ id, name, types }) => (
+          <li key={id} className={`card ${types[0].type.name}`}>
+            <img
+              className="card-image"
+              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
+              alt={name}
+            />
+            <h2>
+              {id}. {name}
+            </h2>
+
+            <p className="type">
+              {types.map((item) => item.type.name).join(" || ")}
+            </p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
