@@ -57,8 +57,16 @@ body {
   background-color: rgb(255, 78, 9);
 }
 
+.fire .type{
+  color: white;
+}
+
 .grass {
   background-color: rgb(95, 217, 138);
+}
+
+.grass .type{
+  color: white;
 }
 
 .water {
@@ -90,6 +98,10 @@ body {
 
 .electric {
   background-color: #f9ce0e;
+}
+
+.electric .type{
+  color: white;
 }
 
 .rock {
