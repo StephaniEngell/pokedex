@@ -16,7 +16,7 @@ export default function Home() {
   };
 
   const arrayPokemons = () =>
-    Array(150)
+    Array(500)
       .fill()
       .map((_, index) => getPokemons(index + 1));
 
